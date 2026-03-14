@@ -1,35 +1,32 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-import '../onboarding/onboarding_screen.dart';
+import 'package:untitled1/ui/screens/OnBoarding/onboarding_screen.dart';
+import 'package:untitled1/utils/AppAssets.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+class Splash extends StatefulWidget{
+  static String routeName="SplashScreen";
+  const Splash({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<Splash> createState() => _SplashState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const OnboardingScreen()),
-      );
-    });
+    Future.delayed(Duration(seconds: 3),
+          () {
+        Navigator.pushNamed(context, Onboarding.routeName);
+      },
+    );
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: Center(
-        child: Image.asset(
-          'assets/images/logo.png',
-          width: 200,
-        ),
+      body: Column(
+        children: [
+          Expanded(child: Image.asset(AppAssets.splashScreen,fit: BoxFit.cover,)),
+        ],
       ),
     );
   }
